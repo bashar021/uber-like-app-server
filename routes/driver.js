@@ -83,8 +83,16 @@ router.get('/drive/accept/:tripId/:driverNumber', async (req, res) => {
 
 router.post('/login',async(req,res)=>{
     console.log(req.body)
+    try{
+      const driver = await Drivers.findOne({number:req.body.number})
+      console.log(driver)
+      res.status(200).json({message:'success',data:driver})
+    }catch(error){
+      console.log(error)
+      return res.status(500).json({message:'internal server error '})
+    }
     
-    res.status(200).json({message:'sucess'})
+   
 })
 
 router.post('/signup',async(req,res)=>{
