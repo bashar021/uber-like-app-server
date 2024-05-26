@@ -82,8 +82,24 @@ router.get('/drive/accept/:tripId/:driverNumber', async (req, res) => {
 
 
 router.post('/login',async(req,res)=>{
-    // console.log(req.body)
+    console.log(req.body)
+    
     res.status(200).json({message:'sucess'})
+})
+
+router.post('/signup',async(req,res)=>{
+  console.log(req.body)
+  try {
+    const data  = {name:req.body.name,email:req.body.email,number:req.body.number,password:req.body.password,vehicle:req.body.vehicle,vehicleNo:req.body.vehicleNo}
+    const result = await Drivers.create(data)
+    if (result) {
+        return res.status(200).json({ data: result })
+    } 
+    return res.status(500).json({ error: error })
+} catch (error) {
+    console.log(error)
+    return res.status(500).json({ error: error })
+}
 })
 
 router.get('/drive/history/:userNumber',async (req,res)=>{

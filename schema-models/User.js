@@ -6,6 +6,7 @@ const UserSchema = new Schema({
     name:{type:String,required:true},
     email :{type:String,required:true,unique:true},
     number:{type:String,minLength:10,required:true},
+    password:{type:String,minLength:5,required:true},
     tripsHistory:[{
         destinationName: { type: String, required: true },
         pickupAdd: { type: String, required: true },

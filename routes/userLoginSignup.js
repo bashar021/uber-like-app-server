@@ -18,6 +18,24 @@ router.post('/login', async (req, res) => {
     }
 
 })
+router.post('/signup',async (req,res)=>{
+    // name:{type:String,required:true},
+    // email :{type:String,required:true,unique:true},
+    // number:{type:String,minLength:10,required:true},
+    // password:{type:String,minLength:10,required:true},
+    
+    try {
+        const data  = {name:req.body.name,email:req.body.email,number:req.body.number,password:req.body.password}
+        const result = await UserProfile.create(data)
+        if (result) {
+            return res.status(200).json({ data: result })
+        } 
+        return res.status(500).json({ error: error })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ error: error })
+    }
+})
 
 
 
